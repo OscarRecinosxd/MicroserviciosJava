@@ -5,16 +5,11 @@
  */
 package com.paymentchain.customer.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
-/**
- *
- * @author sotobotero
- */
+import java.util.List;
+
 @Entity
 @Data
 public class Customer {
@@ -23,4 +18,15 @@ public class Customer {
    private long id;
    private String name;
    private String phone;
+
+   private String iban;
+   private String surname;
+   private String address;
+
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer",
+           cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<CustomerProduct> producto;
+
+   @Transient
+   private List<?> transactions;
 }

@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,13 +39,14 @@ public class CustomerRestController {
     }
     
     @GetMapping("/{id}")
-    public Customer get(@PathVariable String id) {
-        return null;
+    public Customer get(@PathVariable Long id) {
+        return customerRepository.findById(id).orElse(null);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> put(@PathVariable String id, @RequestBody Customer input) {
-        return null;
+    public ResponseEntity<?> put(@PathVariable Long id, @RequestBody Customer input) {
+        Customer save = customerRepository.save(input);
+        return ResponseEntity.ok(save);
     }
     
     @PostMapping
@@ -53,8 +56,10 @@ public class CustomerRestController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        return null;
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        Optional<Customer> findById = customerRepository.findById(id);
+        findById.ifPresent(customerRepository::delete);
+        return ResponseEntity.ok().build();
     }
     
 }
