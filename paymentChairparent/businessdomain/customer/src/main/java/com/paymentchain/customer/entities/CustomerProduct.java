@@ -11,6 +11,7 @@ public class CustomerProduct {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long productId;
+
     @Transient
     private String productName;
 
