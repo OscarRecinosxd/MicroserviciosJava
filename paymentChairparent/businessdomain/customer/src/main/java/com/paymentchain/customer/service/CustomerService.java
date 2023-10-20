@@ -1,4 +1,4 @@
-package com.paymentchain.customer;
+package com.paymentchain.customer.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.paymentchain.customer.respository.CustomerRepository;
@@ -17,6 +17,7 @@ import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -55,5 +56,23 @@ public class CustomerService {
                 .retrieve().bodyToMono(JsonNode.class).block();
         String name = block.get("name").asText();
         return name;
+    }
+
+    public List<?> getTransactions(String iban){
+        WebClient build = webClientBuilder.clientConnector(new ReactorClientHttpConnector(client))
+                .baseUrl("http://localhost:8082/transaction")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        List<?> transactions = build.method(HttpMethod.GET).uri(uriBuilder ->
+                        uriBuilder
+                                .path("/customer/transactions")
+                                .queryParam("iban",iban)
+                                .build())
+                                .retrieve().bodyToFlux(Object.class).collectList().block();
+
+
+        return  transactions;
+
     }
 }

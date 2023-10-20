@@ -20,30 +20,20 @@ public class TransactionServiceImpl implements TransactionlService{
 
     @Override
     public Transaction updateTransaction(Transaction transaction, Long id) {
-        Transaction transactionSaved = transactionRepository.findById(id).orElse(null);
+        transaction.setId(id);
+        transactionRepository.save(transaction);
 
-        if (transactionSaved!=null){
-            transactionSaved.setReference(transaction.getReference());
-            transactionSaved.setAccountIban(transaction.getAccountIban());
-            transactionSaved.setDate(transaction.getDate());
-            transactionSaved.setAmount(transaction.getAmount());
-            transactionSaved.setFee(transaction.getFee());
-            transactionSaved.setDescription(transaction.getDescription());
-            transactionSaved.setStatus(transaction.getStatus());
-            transactionSaved.setChannel(transaction.getChannel());
-            transactionSaved.save();
-        }
+        return transaction;
+    }
 
-
-
-
-
-        return null;
+    @Override
+    public Transaction findByIdTransaction(Long id) {
+        return transactionRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Transaction> findAllTransaction() {
-        return null;
+        return transactionRepository.findAll();
     }
 
     @Override

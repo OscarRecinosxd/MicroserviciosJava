@@ -28,7 +28,6 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable Long id,@RequestBody Product product) {
         Product save = productService.update(product,id);
-
         return ResponseEntity.ok(save);
     }
 
@@ -38,7 +37,7 @@ public class ProductController {
         return ResponseEntity.ok(save);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
         productService.delete(id);
         return ResponseEntity.ok().build();

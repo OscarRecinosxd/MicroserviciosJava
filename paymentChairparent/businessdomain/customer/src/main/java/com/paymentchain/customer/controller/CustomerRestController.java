@@ -5,26 +5,16 @@
  */
 package com.paymentchain.customer.controller;
 
-import com.paymentchain.customer.CustomerService;
+import com.paymentchain.customer.service.CustomerService;
 import com.paymentchain.customer.entities.Customer;
 import com.paymentchain.customer.respository.CustomerRepository;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.epoll.EpollChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.netty.http.client.HttpClient;
-
 /**
  *
  * @author sotobotero
@@ -63,6 +53,10 @@ public class CustomerRestController {
         customer.getProducto().forEach(p ->
                     p.setProductName(customerService.getProductName(p.getProductId()))
                 );
+
+        List<?> transactions = customerService.getTransactions(customer.getIban());
+            customer.setTransactions(transactions);
+
         return customer;
     }
 
