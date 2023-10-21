@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    //@Value("${user.role}")
+    @Value("${user.role}")
     private String role;
 
     @GetMapping()
