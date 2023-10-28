@@ -9,9 +9,9 @@
 	</parent>
         
 	<groupId>com.oscarrecinos</groupId>
-	<artifactId>adminServer</artifactId>
+	<artifactId>adminserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>adminServer</name>
+	<name>adminserver</name>
 	<description>adminServer</description>
 
 	<dependencies>

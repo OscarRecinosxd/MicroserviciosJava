@@ -88,28 +88,27 @@
                     </execution>
                 </executions>
             </plugin>        
-            <!--   <plugin>
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-version}</version>                               
+                <version>${dockerfile-maven-version}</version>
                 <executions>
-                    <execution>                        
-                        <id>build-docker-image</id>
-                        <phase>package</phase>
-                        <goals>                                              
-                            <goal>build</goal>
-                           <goal>push</goal>
-                        </goals>
-                    </execution>
+                  <execution>
+                    <id>default</id>
+                    <goals>
+                      <goal>build</goal>
+                      <goal>push</goal>
+                    </goals>
+                  </execution>
                 </executions>
-                <configuration>                       
-                    <repository>digitalthinking/microservice-docker-${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
+                <configuration>
+                  <repository>${project.artifactId}</repository>
+                  <tag>${project.version}</tag>
+                  <buildArgs>
+                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                  </buildArgs>
                 </configuration>
-            </plugin>-->  
+            </plugin>
             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

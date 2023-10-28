@@ -8,9 +8,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.oscarrecinos</groupId>
-	<artifactId>configServer</artifactId>
+	<artifactId>configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>configServer</name>
+	<name>configserver</name>
 	<description>configServer</description>
 
 	<dependencies>
