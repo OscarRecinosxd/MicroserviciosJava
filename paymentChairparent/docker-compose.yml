@@ -80,3 +80,23 @@ services:
       - configuration
     ports:
       - 8082:8082
+  postgres_db:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - 3432:5432
+    volumes:
+      - ./dbfiles:/docker-entrypoint-initdb.d
+      - /var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER: postgres
+      - POSTGRES_PASSWORD: 1234
+      - POSTGRES_DB: postgres
+  pgadmin4:
+    image: dpage/pgadmin4
+    restart : always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+
+
+     

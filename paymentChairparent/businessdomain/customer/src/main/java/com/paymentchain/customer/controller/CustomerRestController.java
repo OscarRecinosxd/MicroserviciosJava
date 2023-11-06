@@ -8,6 +8,7 @@ package com.paymentchain.customer.controller;
 import com.paymentchain.customer.service.CustomerService;
 import com.paymentchain.customer.entities.Customer;
 import com.paymentchain.customer.respository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class CustomerRestController {
 
     @Autowired
     CustomerService customerService;
+
+
+
 
     @GetMapping()
     public List<Customer> list() {

@@ -15,6 +15,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Value("${user.role}")
+    private String role;
+
+    @GetMapping("/hello-world")
+    public ResponseEntity<?> helloWord(){
+        return ResponseEntity.ok(role);
+    }
 
     @GetMapping()
     public List<Product> findAll() {
